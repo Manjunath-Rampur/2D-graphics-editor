@@ -6,13 +6,53 @@
 #define HEIGHT 25
 #define MAX_OBJECTS 50
 
+// Shape Types
+enum ShapeType {
+    LINE = 1,
+    RECTANGLE,
+    TRIANGLE,
+    CIRCLE
+};
+
+// Object Structure
+typedef struct {
+    int active;
+    int type;
+
+    int x1, y1;
+    int x2, y2;
+
+    int x3, y3;     // Triangle
+
+    int radius;     // Circle
+
+    char symbol;
+} Object;
+
 char canvas[HEIGHT][WIDTH];
+Object objects[MAX_OBJECTS];
 
 int isWithinBounds(int x, int y) {
     return (x >= 0 && x < WIDTH &&
             y >= 0 && y < HEIGHT);
 }
 
+void clearCanvas() {
+    for(int i = 0; i < HEIGHT; i++) {
+        for(int j = 0; j < WIDTH; j++) {
+            canvas[i][j] = ' ';
+        }
+    }
+}
+
+void displayCanvas() {
+    for(int i = 0; i < HEIGHT; i++) {
+        for(int j = 0; j < WIDTH; j++) {
+            printf("%c", canvas[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 void setPixel(int x, int y, char sym) {
     if(isWithinBounds(x, y)) {
@@ -84,21 +124,120 @@ void drawCircle(int h, int k, int r, char sym)
         }
     }
 }
-int main(){
-    for(int i=0;i<WIDTH;i++){
-        for(int j=0;j<HEIGHT;j++){
-            canvas[j][i]=' ';
+
+void redrawAll() {
+
+    clearCanvas();
+
+    for(int i = 0; i < MAX_OBJECTS; i++) {
+
+        if(!objects[i].active)
+            continue;
+
+        switch(objects[i].type) {
+
+            case LINE:
+                drawLine(
+                    objects[i].x1,
+                    objects[i].y1,
+                    objects[i].x2,
+                    objects[i].y2,
+                    objects[i].symbol);
+                break;
+
+            case RECTANGLE:
+                drawRectangle(
+                    objects[i].x1,
+                    objects[i].y1,
+                    objects[i].x2,
+                    objects[i].y2,
+                    objects[i].symbol);
+                break;
+
+            case TRIANGLE:
+                drawTriangle(
+                    objects[i].x1,
+                    objects[i].y1,
+                    objects[i].x2,
+                    objects[i].y2,
+                    objects[i].x3,
+                    objects[i].y3,
+                    objects[i].symbol);
+                break;
+
+            case CIRCLE:
+                drawCircle(
+                    objects[i].x1,
+                    objects[i].y1,
+                    objects[i].radius,
+                    objects[i].symbol);
+                break;
         }
     }
-    //drawLine(0,0,10,10,'*');
-    //drawTriangle(1,1,1,7,7,1,'*');
-    //drawRectangle(1,1,10,10,'*');
-    drawCircle(9,8,6,'*');
-    for(int i = 0; i < HEIGHT; i++){
-        for(int j = 0; j < WIDTH; j++){
-            printf("%c", canvas[i][j]);
+}
+
+
+int addObject(Object obj) {
+
+    for(int i = 0; i < MAX_OBJECTS; i++) {
+
+        if(!objects[i].active) {
+            objects[i] = obj;
+            objects[i].active = 1;
+            return i;
         }
-        printf("\n");
     }
-    return 0;
+
+    return -1;
+}
+
+int main() {
+
+    memset(objects, 0, sizeof(objects));
+
+    Object line = {
+        1, LINE,
+        2, 2,
+        20, 10,
+        0, 0,
+        0,
+        '*'
+    };
+
+    Object rect = {
+        1, RECTANGLE,
+        25, 3,
+        45, 12,
+        0, 0,
+        0,
+        '*'
+    };
+
+    Object tri = {
+        1, TRIANGLE,
+        55, 3,
+        70, 10,
+        60, 18,
+        0,
+        '*'
+    };
+
+    Object cir = {
+        1, CIRCLE,
+        15, 18,
+        0, 0,
+        0, 0,
+        5,
+        '*'
+    };
+
+    int lineID = addObject(line);
+    int rectID = addObject(rect);
+    int triID = addObject(tri);
+    int circleID = addObject(cir);
+
+    redrawAll();
+
+    printf("Original Picture:\n\n");
+    displayCanvas();
 }

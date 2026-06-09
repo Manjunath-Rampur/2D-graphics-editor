@@ -190,6 +190,12 @@ int addObject(Object obj) {
 
     return -1;
 }
+void deleteObject(int id) {
+
+    if(id >= 0 && id < MAX_OBJECTS)
+        objects[id].active = 0;
+}
+
 
 int main() {
 
@@ -240,4 +246,11 @@ int main() {
 
     printf("Original Picture:\n\n");
     displayCanvas();
+
+    printf("\nDeleting Rectangle...\n\n");
+    deleteObject(rectID);
+
+    redrawAll();
+    displayCanvas();
+
 }

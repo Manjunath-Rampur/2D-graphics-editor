@@ -195,7 +195,15 @@ void deleteObject(int id) {
     if(id >= 0 && id < MAX_OBJECTS)
         objects[id].active = 0;
 }
+void modifyObject(int id, Object newObj) {
 
+    if(id >= 0 && id < MAX_OBJECTS &&
+       objects[id].active) {
+
+        newObj.active = 1;
+        objects[id] = newObj;
+    }
+}
 
 int main() {
 
@@ -252,5 +260,14 @@ int main() {
 
     redrawAll();
     displayCanvas();
+
+    printf("\nModifying Circle...\n\n");
+
+    cir.radius = 8;
+    modifyObject(circleID, cir);
+
+    redrawAll();
+    displayCanvas();
+    return 0;
 
 }

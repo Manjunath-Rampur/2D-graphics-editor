@@ -1,0 +1,127 @@
+MINI PROJECT – PROMPT HISTORY
+
+Project Title: 2D Graphics Editor Using C
+
+==================================================
+DAY 1
+
+Prompt:
+Write functions for a 2D Graphics Editor in C to draw the following shapes using '*' characters on a 2D character canvas:
+
+1. Line
+2. Rectangle
+3. Triangle
+4. Circle
+
+Use a 2D array to represent the drawing area and implement separate functions for each shape.
+
+Response:
+Implemented the following drawing functions:
+
+* drawLine()
+* drawRectangle()
+* drawTriangle()
+* drawCircle()
+
+Features added:
+
+* Line drawing using DDA algorithm
+* Rectangle drawing using four lines
+* Triangle drawing using three lines
+* Circle drawing using coordinate calculations
+* setPixel() function for plotting points
+* Boundary checking using isWithinBounds()
+
+==================================================
+DAY 2
+
+Prompt:
+Extend the graphics editor by implementing canvas management and object handling. Use structures to store shape information and allow objects to be added to the picture. Also implement functions to display the picture and redraw all objects.
+
+Response:
+Implemented:
+
+* clearCanvas()
+* displayCanvas()
+* addObject()
+* redrawAll()
+
+Features added:
+
+* 2D character array canvas
+* Object structure for storing shapes
+* Storage for multiple objects
+* Canvas clearing functionality
+* Displaying the complete picture
+* Redrawing all active objects from stored data
+
+==================================================
+DAY 3
+
+Prompt:
+Further extend the 2D Graphics Editor by implementing object deletion. Users should be able to remove any object from the picture and the canvas should update automatically.
+
+Response:
+Implemented:
+
+* deleteObject()
+
+Features added:
+
+* Object deletion by ID/index
+* Active/inactive object management
+* Automatic canvas refresh after deletion
+* Updated redraw logic
+
+==================================================
+DAY 4
+
+Prompt:
+Complete the 2D Graphics Editor by implementing object modification functionality. Users should be able to change an existing object's properties and redraw the updated picture. Perform final debugging and code cleanup.
+
+Response:
+Implemented:
+
+* modifyObject()
+
+Features added:
+
+* Object editing functionality
+* Updating coordinates and shape properties
+* Automatic redraw after modification
+* Bug fixes
+* Boundary validation improvements
+* Code optimization and cleanup
+* Final testing of all drawing operations
+
+==================================================
+FINAL PROJECT FEATURES
+
+✔ Draw Line
+✔ Draw Rectangle
+✔ Draw Triangle
+✔ Draw Circle
+✔ Add Objects
+✔ Delete Objects
+✔ Modify Objects
+✔ Display Picture
+✔ Clear Canvas
+✔ Redraw All Objects
+✔ Boundary Checking
+✔ Shape Storage Using Structures
+✔ 2D Character Array Canvas
+
+==================================================
+TOOLS AND CONCEPTS USED
+
+* C Programming Language
+* Structures
+* Arrays
+* Functions
+* Enumerations
+* DDA Line Drawing Algorithm
+* Coordinate Geometry
+* Menu-Driven Programming
+* Object Management
+
+
